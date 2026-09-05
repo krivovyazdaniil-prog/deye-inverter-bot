@@ -24,7 +24,7 @@ SOLARMAN_APP_SECRET = os.getenv("SOLARMAN_APP_SECRET")
 INVERTER_HOME_SN = os.getenv("LOGGER_HOME_SN")
 INVERTER_APT_SN = os.getenv("LOGGER_APT_SN")
 
-BASE_URL = "https://globalapi.solarmanpv.com"
+BASE_URL = "https://api.solarmanpv.com"
 CHECK_INTERVAL_MINUTES = 1
 
 logging.basicConfig(level=logging.INFO)
