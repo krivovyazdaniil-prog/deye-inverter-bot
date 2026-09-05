@@ -61,11 +61,11 @@ async def get_access_token() -> str:
 
 async def get_inverter_data(device_sn: str) -> dict:
     token = await get_access_token()
-    # Исправленный эндпоинт: /device/v1.0/currentData вместо /station/...
     url = f"{BASE_URL}/device/v1.0/currentData?appId={SOLARMAN_APP_ID}&language=en"
     headers = {"Authorization": f"Bearer {token}"}
     payload = {
-        "deviceSn": device_sn
+        "deviceSn": device_sn,
+        "deviceType": 1
     }
     
     async with aiohttp.ClientSession() as session:
@@ -78,7 +78,8 @@ async def get_inverter_data(device_sn: str) -> dict:
                     result[item.get("key")] = item.get("value")
                 return result
             else:
-                token_cache["token"] = None
+                if data.get("code") in [2101009, 1000]: 
+                    token_cache["token"] = None
                 raise Exception(f"Ошибка API Solarman: {data}")
 
 def get_val(data: dict, *keys, default="N/A"):
