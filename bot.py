@@ -61,11 +61,11 @@ async def get_access_token() -> str:
 
 async def get_inverter_data(device_sn: str) -> dict:
     token = await get_access_token()
-    url = f"{BASE_URL}/station/v1.0/device/currentData?appId={SOLARMAN_APP_ID}"
+    # Исправленный эндпоинт: /device/v1.0/currentData вместо /station/...
+    url = f"{BASE_URL}/device/v1.0/currentData?appId={SOLARMAN_APP_ID}&language=en"
     headers = {"Authorization": f"Bearer {token}"}
     payload = {
-        "deviceSn": device_sn,
-        "deviceType": 1
+        "deviceSn": device_sn
     }
     
     async with aiohttp.ClientSession() as session:
