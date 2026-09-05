@@ -24,8 +24,8 @@ SOLARMAN_APP_SECRET = os.getenv("SOLARMAN_APP_SECRET")
 INVERTER_HOME_SN = os.getenv("LOGGER_HOME_SN")
 INVERTER_APT_SN = os.getenv("LOGGER_APT_SN")
 
-BASE_URL = "https://api.solarmanpv.com"
-CHECK_INTERVAL_MINUTES = 1
+BASE_URL = "https://globalapi.solarmanpv.com"
+CHECK_INTERVAL_MINUTES = 5
 
 logging.basicConfig(level=logging.INFO)
 
@@ -165,7 +165,7 @@ async def check_inverters_background():
 async def start_cmd(message: types.Message):
     await message.answer(
         "🤖 Бот мониторинга Deye запущен!\n"
-        "Опрос каждые 1 минуту с уведомлениями только по свету.\n"
+        "Опрос каждые 5 минут с уведомлениями только по свету.\n"
         "Команды:\n/status — проверить текущие данные"
     )
 
